@@ -1,13 +1,13 @@
 import { DataTypes, Model } from 'sequelize';
 import db from '.';
 
-class Teams extends Model {
+class Team extends Model {
   // declare <campo>: <tipo>;
   public id!: number;
   public teamName!: string;
 }
 
-Teams.init({
+Team.init({
   // ... Campos
   id: {
     type: DataTypes.INTEGER,
@@ -34,4 +34,4 @@ Teams.init({
 // Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 
-export default Teams;
+export default Team;

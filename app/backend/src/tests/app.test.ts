@@ -4,7 +4,7 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 
 import { app } from '../app';
-import Example from '../database/models/ExampleModel';
+//import Example from '../database/models/ExampleModel';
 
 import { Response } from 'superagent';
 
@@ -39,7 +39,11 @@ describe('Seu teste', () => {
   //   expect(...)
   // });
 
-  it('Seu sub-teste', () => {
-    expect(false).to.be.eq(true);
+  it('Testa se backend funciona', async () => {
+    //expect(false).to.be.eq(false);
+    const res = await chai
+    .request(app).get('/');
+    expect(res).to.have.status(200);
+    expect(res.body.ok).to.be.eq(true);
   });
 });
