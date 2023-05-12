@@ -3,7 +3,7 @@ import jwt = require('jsonwebtoken');
 import { Request, Response, NextFunction } from 'express';
 import * as User from '../services/user.service';
 
-function checkEmpty(str: string) {
+function checkEmpty(str: string | undefined) {
   return str === undefined || str.length === 0;
 }
 
@@ -65,4 +65,13 @@ export function getToken(req: Request, res: Response) {
   );
 
   res.status(200).json({ token });
+}
+//role
+export function checkTokenExist(req: Request, res: Response, next: NextFunction) {
+  const { authorization } = req.headers;
+  if (checkEmpty(authorization)) {
+    res.status(401).json({ message: 'Token not found' });
+  } else {
+    next();
+  }
 }

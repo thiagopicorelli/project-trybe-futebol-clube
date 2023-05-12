@@ -105,4 +105,14 @@ describe('Login', () => {
 
     expect(res).to.have.status(401);
   });
+
+  it('Testa se login/role não funciona sem o token', async () => {
+    //expect(false).to.be.eq(false);
+    const res = await chai
+    .request(app)
+    .get('/login/role');
+
+    expect(res).to.have.status(401);
+  });
+
 });
