@@ -1,12 +1,13 @@
 import bcrypt = require('bcryptjs');
 import jwt = require('jsonwebtoken');
+import { Request, Response, NextFunction } from 'express';
 import * as User from '../services/user.service';
 
 function checkEmpty(str: string) {
   return str === undefined || str.length === 0;
 }
 
-export function checkFieldsFilled(req: any, res: any, next: any) {
+export function checkFieldsFilled(req: Request, res: Response, next: NextFunction) {
   const { email, password } = req.body;
   if (checkEmpty(email) || checkEmpty(password)) {
     res.status(400).json({ message: 'All fields must be filled' });
@@ -17,7 +18,7 @@ export function checkFieldsFilled(req: any, res: any, next: any) {
 
 const invalidMessage = 'Invalid email or password';
 
-export function checkFieldsValid(req: any, res: any, next: any) {
+export function checkFieldsValid(req: Request, res: Response, next: NextFunction) {
   const { email, password } = req.body;
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   if (emailRegex.test(email) && password.length >= 6) {
@@ -27,7 +28,7 @@ export function checkFieldsValid(req: any, res: any, next: any) {
   }
 }
 
-export async function checkEmailInDatabase(req: any, res: any, next: any) {
+export async function checkEmailInDatabase(req: Request, res: Response, next: NextFunction) {
   const { email } = req.body;
   const database = await User.find(email);
   if (database !== null) {
@@ -38,7 +39,7 @@ export async function checkEmailInDatabase(req: any, res: any, next: any) {
   }
 }
 
-export function checkPasswordInDatabase(req: any, res: any, next: any) {
+export function checkPasswordInDatabase(req: Request, res: Response, next: NextFunction) {
   const { password, hash } = req.body;
   if (bcrypt.compareSync(password, hash)) {
     next();
@@ -47,7 +48,7 @@ export function checkPasswordInDatabase(req: any, res: any, next: any) {
   }
 }
 
-export function getToken(req: any, res: any) {
+export function getToken(req: Request, res: Response) {
   const { email, password } = req.body;
 
   const jwtConfig = {
