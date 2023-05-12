@@ -10,6 +10,11 @@ router.post(
   Login.checkPasswordInDatabase,
   Login.getToken,
 );
-router.get('/login/role', Login.checkTokenExist);
+router.get(
+  '/login/role',
+  Login.checkTokenExists,
+  Login.checkTokenValid,
+  Login.getRole,
+);
 
 export default router;

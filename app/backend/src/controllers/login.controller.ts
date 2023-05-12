@@ -66,12 +66,36 @@ export function getToken(req: Request, res: Response) {
 
   res.status(200).json({ token });
 }
-//role
-export function checkTokenExist(req: Request, res: Response, next: NextFunction) {
+// role route
+export function checkTokenExists(req: Request, res: Response, next: NextFunction) {
   const { authorization } = req.headers;
   if (checkEmpty(authorization)) {
     res.status(401).json({ message: 'Token not found' });
   } else {
     next();
+  }
+}
+
+export function checkTokenValid(req: Request, res: Response, next: NextFunction) {
+  let { authorization } = req.headers;
+  if (authorization === undefined) {
+    authorization = '';
+  }
+  try {
+    const decoded = jwt.verify(authorization, process.env.JWT_SECRET as jwt.Secret);
+    req.body.decoded = decoded;
+    next();
+  } catch (e) {
+    res.status(401).json({ message: 'Token must be a valid token' });
+  }
+}
+
+export async function getRole(req: Request, res: Response) {
+  const { email } = req.body.decoded.data;
+  const user = await User.find(email);
+  if (user !== null) {
+    res.status(200).json({ role: user.role });
+  } else {
+    res.status(401).json({ message: 'Token must be a valid token' });
   }
 }

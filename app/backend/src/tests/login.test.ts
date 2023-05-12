@@ -115,4 +115,24 @@ describe('Login', () => {
     expect(res).to.have.status(401);
   });
 
+  it('Testa se login/role não funciona com um token invalido', async () => {
+    //expect(false).to.be.eq(false);
+    const res = await chai
+    .request(app)
+    .get('/login/role')
+    .set('authorization', 'aaaa');
+
+    expect(res).to.have.status(401);
+  });
+
+  it('Testa se login/role funciona com um token valido', async () => {
+    //expect(false).to.be.eq(false);
+    const res = await chai
+    .request(app)
+    .get('/login/role')
+    .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidXNlckB1c2VyLmNvbSIsInBhc3N3b3JkIjoic2VjcmV0X3VzZXIifSwiaWF0IjoxNjgzOTI5MDA1LCJleHAiOjE2ODQ1MzM4MDV9.yxv3DhfPostdbkTUqzZleRjhCkGLi7lXgXo5oYgom7E');
+
+    expect(res).to.have.status(200);
+  });
+
 });
