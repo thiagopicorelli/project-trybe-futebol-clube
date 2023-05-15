@@ -14,7 +14,7 @@ const { expect } = chai;
 
 process.env.JWT_SECRET = 'jwt_secret';
 
-describe('Login', () => {
+describe('Matches', () => {
   /**
    * Exemplo do uso de stubs com tipos
    */

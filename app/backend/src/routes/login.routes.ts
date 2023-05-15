@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import * as Login from '../controllers/login.controller';
+import * as Token from '../middleware/token.middleware';
 
 const router = Router();
 router.post(
@@ -8,12 +9,12 @@ router.post(
   Login.checkFieldsValid,
   Login.checkEmailInDatabase,
   Login.checkPasswordInDatabase,
-  Login.getToken,
+  Login.createToken,
 );
 router.get(
   '/login/role',
-  Login.checkTokenExists,
-  Login.checkTokenValid,
+  Token.checkTokenExists,
+  Token.checkTokenValid,
   Login.getRole,
 );
 

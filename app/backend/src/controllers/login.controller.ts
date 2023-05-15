@@ -1,11 +1,8 @@
 import bcrypt = require('bcryptjs');
 import jwt = require('jsonwebtoken');
 import { Request, Response, NextFunction } from 'express';
+import { checkEmpty } from '../middleware/token.middleware';
 import * as User from '../services/user.service';
-
-function checkEmpty(str: string | undefined) {
-  return str === undefined || str.length === 0;
-}
 
 export function checkFieldsFilled(req: Request, res: Response, next: NextFunction) {
   const { email, password } = req.body;
@@ -48,7 +45,7 @@ export function checkPasswordInDatabase(req: Request, res: Response, next: NextF
   }
 }
 
-export function getToken(req: Request, res: Response) {
+export function createToken(req: Request, res: Response) {
   const { email, password } = req.body;
 
   const jwtConfig = {
@@ -67,29 +64,6 @@ export function getToken(req: Request, res: Response) {
   res.status(200).json({ token });
 }
 // role route
-export function checkTokenExists(req: Request, res: Response, next: NextFunction) {
-  const { authorization } = req.headers;
-  if (checkEmpty(authorization)) {
-    res.status(401).json({ message: 'Token not found' });
-  } else {
-    next();
-  }
-}
-
-export function checkTokenValid(req: Request, res: Response, next: NextFunction) {
-  let { authorization } = req.headers;
-  if (authorization === undefined) {
-    authorization = '';
-  }
-  try {
-    const decoded = jwt.verify(authorization, process.env.JWT_SECRET as jwt.Secret);
-    req.body.decoded = decoded;
-    next();
-  } catch (e) {
-    res.status(401).json({ message: 'Token must be a valid token' });
-  }
-}
-
 export async function getRole(req: Request, res: Response) {
   const { email } = req.body.decoded.data;
   const user = await User.find(email);

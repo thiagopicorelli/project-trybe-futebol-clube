@@ -30,3 +30,17 @@ export async function query(inProgress: boolean) {
   });
   return match;
 }
+
+export async function changeGoals(id: string, homeTeamGoals: string, awayTeamGoals: string) {
+  await Matches.update(
+    { homeTeamGoals, awayTeamGoals },
+    { where: { id } },
+  );
+}
+
+export async function finishMatch(id: string) {
+  await Matches.update(
+    { inProgress: false },
+    { where: { id } },
+  );
+}
