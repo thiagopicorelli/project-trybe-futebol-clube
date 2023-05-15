@@ -14,6 +14,8 @@ export async function listAll() {
         as: 'awayTeam',
         attributes: ['teamName'],
       }],
+      raw: true,
+      nest: true,
     });
     return matches;
   } catch (e) {
