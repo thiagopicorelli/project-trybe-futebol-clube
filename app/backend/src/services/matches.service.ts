@@ -1,25 +1,32 @@
 import Matches from '../database/models/Matches';
 import Teams from '../database/models/Team';
 
+const matchConfig = {
+  include: [{
+    model: Teams,
+    as: 'homeTeam',
+    attributes: ['teamName'],
+  },
+  {
+    model: Teams,
+    as: 'awayTeam',
+    attributes: ['teamName'],
+  }],
+  raw: true,
+  nest: true,
+};
+
 export async function listAll() {
-  const matches = await Matches.findAll({
-    include: [{
-      model: Teams,
-      as: 'homeTeam',
-      attributes: ['teamName'],
-    },
-    {
-      model: Teams,
-      as: 'awayTeam',
-      attributes: ['teamName'],
-    }],
-    raw: true,
-    nest: true,
-  });
+  const matches = await Matches.findAll(matchConfig);
   return matches;
 }
 
-export async function find(id: string) {
-  const match = await Matches.findByPk(id);
+export async function query(inProgress: boolean) {
+  const match = await Matches.findAll({
+    ...matchConfig,
+    where: {
+      inProgress,
+    },
+  });
   return match;
 }
