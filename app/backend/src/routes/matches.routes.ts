@@ -4,6 +4,12 @@ import * as Token from '../middleware/token.middleware';
 
 const router = Router();
 router.get('/matches', Matches.query);
+router.post(
+  '/matches',
+  Token.checkTokenExists,
+  Token.checkTokenValid,
+  Matches.createMatch,
+);
 router.patch(
   '/matches/:id',
   Token.checkTokenExists,

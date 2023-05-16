@@ -13,6 +13,7 @@ chai.use(chaiHttp);
 const { expect } = chai;
 
 process.env.JWT_SECRET = 'jwt_secret';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidXNlckB1c2VyLmNvbSIsInBhc3N3b3JkIjoic2VjcmV0X3VzZXIifSwiaWF0IjoxNjgzOTI5MDA1LCJleHAiOjE2ODQ1MzM4MDV9.yxv3DhfPostdbkTUqzZleRjhCkGLi7lXgXo5oYgom7E';
 
 describe('Login', () => {
   /**
@@ -130,7 +131,7 @@ describe('Login', () => {
     const res = await chai
     .request(app)
     .get('/login/role')
-    .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoidXNlckB1c2VyLmNvbSIsInBhc3N3b3JkIjoic2VjcmV0X3VzZXIifSwiaWF0IjoxNjgzOTI5MDA1LCJleHAiOjE2ODQ1MzM4MDV9.yxv3DhfPostdbkTUqzZleRjhCkGLi7lXgXo5oYgom7E');
+    .set('authorization', token);
 
     expect(res).to.have.status(200);
   });

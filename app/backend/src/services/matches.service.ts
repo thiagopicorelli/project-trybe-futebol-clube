@@ -31,6 +31,17 @@ export async function query(inProgress: boolean) {
   return match;
 }
 
+export async function createMatch(
+  homeTeamId: string,
+  awayTeamId: string,
+  homeTeamGoals: string,
+  awayTeamGoals: string,
+) {
+  return Matches.create(
+    { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals, inProgress: true },
+  );
+}
+
 export async function changeGoals(id: string, homeTeamGoals: string, awayTeamGoals: string) {
   await Matches.update(
     { homeTeamGoals, awayTeamGoals },
