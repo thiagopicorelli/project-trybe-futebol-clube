@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import Matches from '../database/models/Matches';
 import Teams from '../database/models/Team';
 
@@ -26,6 +27,23 @@ export async function query(inProgress: boolean) {
     ...matchConfig,
     where: {
       inProgress,
+    },
+  });
+  return match;
+}
+
+export async function findByTeam(id: number) {
+  const match = await Matches.findAll({
+    where: {
+      [Op.or]: [
+        {
+          homeTeamId: id,
+        },
+        {
+          awayTeamId: id,
+        },
+      ],
+      inProgress: false,
     },
   });
   return match;
