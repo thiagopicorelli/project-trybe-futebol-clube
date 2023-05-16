@@ -49,6 +49,26 @@ export async function findByTeam(id: number) {
   return match;
 }
 
+export async function findByTeamHome(id: number) {
+  const match = await Matches.findAll({
+    where: {
+      homeTeamId: id,
+      inProgress: false,
+    },
+  });
+  return match;
+}
+
+export async function findByTeamAway(id: number) {
+  const match = await Matches.findAll({
+    where: {
+      awayTeamId: id,
+      inProgress: false,
+    },
+  });
+  return match;
+}
+
 export async function createMatch(
   homeTeamId: string,
   awayTeamId: string,
