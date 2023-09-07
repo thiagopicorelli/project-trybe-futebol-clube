@@ -1,10 +1,22 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+# Trybe Futebol Clube
+![front-example](https://github.com/thiagopicorelli/project-trybe-futebol-clube/assets/60528610/210987cd-8b2a-478d-8fd2-94def22ddbdf)
+
+Aplicação feita no curso da Trybe de um back-end dockerizado feito em **Typescript**, utilizando modelagem de dados através do **Sequelize**, com testes utilizando **mocha**, e usando a metodologia **REST**. Ela deve disponibilizar os times, as partidas, os placares e a validação de login a partir de um banco de dados **MySQL** já pronto em um formato para ser consumida pelo frontend também já pronto no projeto.
+
+## Pasta trabalhada
+[/backend](https://github.com/thiagopicorelli/project-trybe-futebol-clube/tree/main/app/backend/src)
+
+## Setup
+Utiliza docker-compose.
+
+`npm run compose:up` para iniciar o docker do frontend, backend e banco de dados.
+
+`localhost:3000` é a rota padrão do frontend e `localhost:3001` é a rota padrão de backend.
+
+`npm run test` executa os testes de backend.
+
+## Linguagens
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)
+![Mocha](https://img.shields.io/badge/-mocha-%238D6748?style=for-the-badge&logo=mocha&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
