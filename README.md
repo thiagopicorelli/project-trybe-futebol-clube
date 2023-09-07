@@ -1,5 +1,5 @@
 # Trybe Futebol Clube
-![front-example](https://github.com/thiagopicorelli/project-trybe-futebol-clube/assets/60528610/210987cd-8b2a-478d-8fd2-94def22ddbdf)
+![front-example](https://github.com/thiagopicorelli/project-trybe-futebol-clube/assets/60528610/f5d8033b-4f1b-482a-8dbc-038285f7026c)
 
 Aplicação feita no curso da Trybe de um back-end dockerizado feito em **Typescript**, utilizando modelagem de dados através do **Sequelize**, com testes utilizando **mocha**, e usando a metodologia **REST**. Ela deve disponibilizar os times, as partidas, os placares e a validação de login a partir de um banco de dados **MySQL** já pronto em um formato para ser consumida pelo frontend também já pronto no projeto.
 
